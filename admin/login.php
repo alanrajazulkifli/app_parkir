@@ -47,7 +47,8 @@
           </div>
         </div>
 
-        <form action="#" class="space-y-4">
+        <!-- Form Mengirim Data via POST ke Halaman Ini Sendiri -->
+        <form action="" method="POST" class="space-y-4">
           <!-- Input Username -->
           <div class="relative">
             <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
@@ -55,7 +56,9 @@
             </span>
             <input 
               type="text" 
+              name="nm_user" 
               placeholder="USERNAME" 
+              required
               class="w-full py-2.5 pl-11 pr-4 border-2 border-gray-800 rounded-full text-xs font-semibold placeholder-gray-400 focus:outline-none focus:border-[#233876]"
             />
           </div>
@@ -67,7 +70,9 @@
             </span>
             <input 
               type="password" 
+              name="pass" 
               placeholder="••••••••" 
+              required
               class="w-full py-2.5 pl-11 pr-4 border-2 border-gray-800 rounded-full text-xs font-semibold placeholder-gray-400 focus:outline-none focus:border-[#233876]"
             />
           </div>
@@ -75,6 +80,7 @@
           <!-- Submit Button -->
           <button 
             type="submit" 
+            name="btn"
             class="w-full bg-[#233876] hover:bg-[#1a2b5c] text-white font-bold py-3 rounded-full text-xs tracking-wider transition-all shadow-md">
             LOGIN
           </button>
@@ -102,17 +108,7 @@
     <!-- Right Side (Welcome Section with Gradient) -->
     <div class="w-full md:w-7/12 hero-gradient p-8 md:p-10 text-white flex flex-col justify-between relative">
       
-      <!-- Navbar -->
-      <nav class="flex items-center justify-end gap-6 text-xs font-medium tracking-wide">
-        <a href="#" class="hover:opacity-80 uppercase text-[10px]">About</a>
-        <a href="#" class="hover:opacity-80 uppercase text-[10px]">Download</a>
-        <a href="#" class="hover:opacity-80 uppercase text-[10px]">Pricing</a>
-        <a href="#" class="hover:opacity-80 uppercase text-[10px]">Contact</a>
-        <a href="#" class="bg-[#233876] px-4 py-1.5 rounded-full text-[10px] font-bold tracking-wider hover:bg-opacity-90">SIGN IN</a>
-        <button class="md:hidden">
-          <i data-lucide="menu" class="w-5 h-5"></i>
-        </button>
-      </nav>
+    
 
       <!-- Main Heading Text -->
       <div class="my-auto pt-16 md:pt-24 max-w-md ml-auto text-right md:text-left">
@@ -137,3 +133,20 @@
   </script>
 </body>
 </html>
+<?php
+    if (isset($_POST['btn'])) {
+        $user = $_POST['uname'];
+        $pass = $_POST['pass'];
+        $sqlLogin = $conn->query("SELECT*FROM tb_user WHERE username='$user' AND password='$pass'");
+        $result = $sqlLogin->fetch_array();
+        $row = $sqlLogin->num_rows;
+        if ($row > 0) {
+            $_SESSION['user']=$result['id_user'];
+            header('location:index.php');
+        }else{
+            echo"<script>
+                alert('Login Gagal, pastikan username dan password benar!');
+                window.location='login.php';";
+        }
+    }
+?>

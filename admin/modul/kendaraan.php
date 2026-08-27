@@ -6,7 +6,7 @@
   <div class="card-body">
     <form method="POST">
       <div class="row g-3">
-        
+            
         <div class="col-md-3">
           <label class="form-label">Jenis Kendaraan</label>
           <select class="form-control" name="jenis_kendaraan" required>
