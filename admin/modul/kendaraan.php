@@ -31,7 +31,6 @@
           <label class="form-label">Status</label>
           <select class="form-control" name="status" required>
             <option value="Masuk">Masuk</option>
-            <option value="Selesai">Selesai</option>
           </select>
         </div>
 
@@ -74,7 +73,6 @@
           <th>Plat Nomor</th>
           <th>Waktu Masuk</th>
           <th>Status</th>
-          <th>Aksi</th>
         </tr>
       </thead>
       <tbody>
@@ -89,10 +87,6 @@
           <td><?= $data['plat_nomor'] ?></td>
           <td><?= $data['waktu_masuk'] ?></td>
           <td><?= $data['status'] ?></td>
-          <td>
-            <a href="?page=edit_kendaraan&id=<?= $data['id_kendaraan'] ?>" class="btn btn-warning btn-sm">Edit</a>
-            <a href="?page=hapus_kendaraan&id=<?= $data['id_kendaraan'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus?')">Hapus</a>
-          </td>
         </tr>
         <?php
         }
