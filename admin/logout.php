@@ -1,7 +1,6 @@
 <?php
-
-if ($_SESSION['user']) {
-    session_destroy();
-    header('location:index.php');
-}
+session_start();
+session_destroy();
+header('Location: login.php');
+exit;
 ?>

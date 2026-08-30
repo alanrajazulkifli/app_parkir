@@ -1,4 +1,17 @@
+<?php
+session_start();
+require_once '../lib/koneksi.php';
 
+if (!isset($_SESSION['user'])) {
+    header('Location: login.php');
+    exit;
+}
+
+if (!in_array($_SESSION['role'] ?? '', ['admin', 'petugas'], true)) {
+    header('Location: login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +20,6 @@
   <title>Dasboard Admin Parkir</title>
    <link rel="icon" href="../aset/gambar/image.png" type="image/icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  
 </head>
 <body>
     <style>
@@ -52,46 +63,34 @@
       <div class="card">
         <div class="card-body">
           <?php
-            require_once '../lib/koneksi.php';
-            // Logika PHP tetap dipertahankan
             $page = isset($_GET['page']) ? $_GET['page'] : 'home';
             switch($page) {
-              
-              // halaman admin utama
               case 'kendaraan':
-                include"modul/kendaraan.php";
-              break;
+                include "modul/kendaraan.php";
+                break;
               case 'pembayaran':
-                include"modul/pembayaran.php";
-              break;
-               
+                include "modul/pembayaran.php";
+                break;
               case 'logout':
-                 include"modul/logout.php";
-              break;
-              
-                
-                // edit dan delete untuk kategori, produk, dan best seller
-
+                include 'logout.php';
+                break;
               case 'editkat':
-                include'modul/del.up/edit.kat.php';
+                include 'modul/del.up/edit.kat.php';
                 break;
-                case 'delkat':
-                include'modul/del.up/del.kat.php';
+              case 'delkat':
+                include 'modul/del.up/del.kat.php';
                 break;
-                case 'editpro':
-                include'modul/del.up/edit.pro.php';
+              case 'editpro':
+                include 'modul/del.up/edit.pro.php';
                 break;
-                case 'delpro':
-                include'modul/del.up/del.pro.php';
+              case 'delpro':
+                include 'modul/del.up/del.pro.php';
                 break;
-               
-
-
               case 'laporan':
                 echo "<h3>Admin parkir</h3><p>Analisa data parkir.</p>";
                 break;
               default:
-                echo "<h3>Overview Dashboard</h3><p>Selamat datang kembali.</p>";
+                echo "<h3>Overview Dashboard</h3><p>Selamat datang kembali, {$_SESSION['user']}.</p>";
             }
           ?>
         </div>
