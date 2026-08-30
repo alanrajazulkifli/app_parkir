@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dasboard lulapin</title>
+  <title>Dasboard Admin Parkir</title>
    <link rel="icon" href="../aset/gambar/image.png" type="image/icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -38,7 +38,7 @@
   <div class="row">
     <nav class="col-md-2 col-lg-2 sidebar p-0">
       <br>
-      <h4 style='text-align: center;'>Lulapin Admin</h4>
+      <h4 style='text-align: center;'>Admin Parkir</h4>
       <div class="nav-links">
         <a href="?page=kendaraan">Kendaraan </a>  
         <a href="?page=pembayaran">Pembayaran</a>
@@ -52,6 +52,7 @@
       <div class="card">
         <div class="card-body">
           <?php
+            require_once '../lib/koneksi.php';
             // Logika PHP tetap dipertahankan
             $page = isset($_GET['page']) ? $_GET['page'] : 'home';
             switch($page) {
@@ -87,10 +88,10 @@
 
 
               case 'laporan':
-                echo "<h3>Laporan Penjualan</h3><p>Analisa performa toko Anda melalui data statistik.</p>";
+                echo "<h3>Admin parkir</h3><p>Analisa data parkir.</p>";
                 break;
               default:
-                echo "<h3>Overview Dashboard</h3><p>Selamat datang kembali. Silakan pilih menu di panel sebelah kiri untuk mengelola data operasional toko perhiasan Anda.</p>";
+                echo "<h3>Overview Dashboard</h3><p>Selamat datang kembali.</p>";
             }
           ?>
         </div>
